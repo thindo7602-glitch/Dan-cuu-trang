@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Củ Cải Nướng Thịt — Bài Văn 150/150</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700;900&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ╔══════════════════════════════════════╗
+   ║           DESIGN TOKENS              ║
+   ╚══════════════════════════════════════╝ */
+:root {
+  --bg:         #0b0908;
+  --bg-2:       #121009;
+  --bg-3:       #1a1710;
+  --bg-4:       #222018;
+  --bg-5:       #2c2820;
+  --gold:       #c48c30;
+  --gold-hi:    #eab84e;
+  --gold-lo:    #9a6e22;
+  --gold-pale:  #d4a84a;
+  --gold-dim:   rgba(196,140,48,.12);
+  --jade:       #4e9468;
+  --jade-hi:    #72b888;
+  --jade-lo:    #366e4c;
+  --jade-dim:   rgba(78,148,104,.12);
+  --ruby:       #a03228;
+  --ruby-dim:   rgba(160,50,40,.10);
+  --azure:      #2e6898;
+  --cream:      #eeead8;
+  --cream-2:    #c2baa4;
+  --cream-3:    #888070;
+  --cream-4:    #504840;
+  --g-bdr:      rgba(196,140,48,.2);
+  --j-bdr:      rgba(78,148,104,.22);
+  --r-bdr:      rgba(160,50,40,.25);
+}
+
+/* ╔══════════════════════════════════════╗
+   ║           RESET + BASE               ║
+   ╚══════════════════════════════════════╝ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 20px;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.26;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+}
+
+/* ╔══════════════════════════════════════╗
+   ║           PROGRESS BAR               ║
+   ╚══════════════════════════════════════╝ */
+#prog {
+  position:fixed; top:0; left:0; height:2.5px; z-index:9998; width:0%;
+  background: linear-gradient(90deg, var(--jade), var(--gold), var(--gold-hi), #fff6cc, var(--gold-hi), var(--gold));
+  background-size: 300% auto;
+  animation: shimmer 4s linear infinite;
+  box-shadow: 0 0 14px rgba(196,140,48,.7), 0 0 28px rgba(196,140,48,.3);
+  transition: width .08s linear;
+}
+
+/* ╔══════════════════════════════════════╗
+   ║           KEYFRAMES                  ║
+   ╚══════════════════════════════════════╝ */
+@keyframes shimmer {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 200% center; }
+}
+@keyframes slowShimmer {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 200% center; }
+}
+@keyframes spinBorder {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes gemPulse {
+  0%,100% { box-shadow: 0 0 6px 1px rgba(196,140,48,.5); }
+  50%     { box-shadow: 0 0 16px 4px rgba(196,140,48,.9), 0 0 32px rgba(196,140,48,.3); }
+}
+@keyframes jadePulse {
+  0%,100% { box-shadow: 0 0 6px 1px rgba(78,148,104,.5); }
+  50%     { box-shadow: 0 0 16px 4px rgba(78,148,104,.9), 0 0 32px rgba(78,148,104,.3); }
+}
+@keyframes floatUp {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-6px); }
+}
+@keyframes fu   { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fi   { from{opacity:0;} to{opacity:1;} }
+@keyframes stemAnim { 0%,100%{opacity:.2;}  50%{opacity:.95;} }
+
+/* ╔══════════════════════════════════════╗
+   ║           HERO                       ║
+   ╚══════════════════════════════════════╝ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 48px 90px;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--g-bdr);
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 75% 60% at 50% 55%, rgba(78,148,104,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 45% at 10% 10%, rgba(196,140,48,.07) 0%,transparent 50%),
+    radial-gradient(ellipse 50% 40% at 90% 85%, rgba(196,140,48,.05) 0%,transparent 50%),
+    radial-gradient(ellipse 35% 25% at 75% 8%,  rgba(78,148,104,.04)  0%,transparent 40%);
+}
+#hero-canvas {
+  position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none; opacity:.6;
+}
+.hero-glyph {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(150px,25vw,280px);
+  font-weight:900; color:transparent;
+  -webkit-text-stroke: 1px rgba(196,140,48,.08);
+  pointer-events:none; user-select:none;
+  letter-spacing:-.02em; line-height:1;
+}
+
+.h-badge {
+  position:relative; z-index:1;
+  display:inline-flex; align-items:center; gap:18px;
+  margin-bottom:34px;
+  opacity:0; animation:fu .9s .15s forwards;
+}
+.h-badge-line { width:48px; height:1px; background:linear-gradient(90deg,transparent,var(--gold)); }
+.h-badge-line.r { background:linear-gradient(90deg,var(--gold),transparent); }
+.h-badge-txt { font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:.52em; color:var(--gold); text-transform:uppercase; }
+
+.h-score {
+  position:relative; z-index:1;
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(3rem,7.5vw,5.5rem);
+  font-weight:900; line-height:1; margin-bottom:8px;
+  background: linear-gradient(90deg, var(--gold-lo), var(--gold), var(--gold-hi), #fff6cc, var(--gold-hi), var(--gold), var(--gold-lo));
+  background-size:300% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter: drop-shadow(0 0 20px rgba(196,140,48,.35));
+  opacity:0; animation: fu .9s .35s forwards, shimmer 5s .9s linear infinite;
+}
+.h-score-lbl {
+  position:relative; z-index:1;
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:.42em;
+  color:var(--cream-3); text-transform:uppercase; margin-bottom:56px;
+  opacity:0; animation:fi .9s .5s forwards;
+}
+.h-title {
+  position:relative; z-index:1;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,6.5vw,5.5rem);
+  font-weight:300; line-height:1.08; letter-spacing:-.01em; color:var(--cream);
+  margin-bottom:14px;
+  opacity:0; animation:fu .9s .62s forwards;
+}
+.h-title em { font-style:italic; color:var(--gold-hi); }
+.h-sub {
+  position:relative; z-index:1;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,1.8vw,1.3rem); font-style:italic;
+  color:var(--cream-3); margin-bottom:68px;
+  opacity:0; animation:fu .9s .78s forwards;
+}
+.h-rule {
+  position:relative; z-index:1;
+  width:220px; height:1px;
+  background: linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 56px;
+  opacity:0; animation:fi .9s .88s forwards;
+}
+.h-epigraph {
+  position:relative; z-index:1;
+  max-width:590px;
+  opacity:0; animation:fu .9s 1.02s forwards;
+}
+.h-epigraph blockquote {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.05rem,1.8vw,1.35rem);
+  font-weight:300; font-style:italic; line-height:1.75;
+  color:var(--cream-2); position:relative; padding:0 36px;
+}
+.h-epigraph blockquote::before {
+  content:'\201C'; position:absolute; left:0; top:-16px;
+  font-size:5rem; line-height:1;
+  color:var(--gold); opacity:.2;
+  font-family:'Cormorant Garamond',serif;
+}
+.h-epigraph cite {
+  display:block; margin-top:14px;
+  font-family:'Cinzel',serif; font-size:8.5px;
+  letter-spacing:.34em; color:var(--cream-4); font-style:normal; text-transform:uppercase;
+}
+.scroll-cue {
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  z-index:1; display:flex; flex-direction:column; align-items:center; gap:8px;
+  opacity:0; animation:fi 1.2s 1.9s forwards;
+}
+.scroll-cue span { font-family:'Cinzel',serif; font-size:8px; letter-spacing:.44em; color:var(--cream-4); text-transform:uppercase; }
+.scroll-stem { width:1px; height:40px; background:linear-gradient(180deg,var(--gold),transparent); animation:stemAnim 2.4s ease-in-out infinite; }
+
+/* ╔══════════════════════════════════════╗
+   ║           PAGE SHELL                 ║
+   ╚══════════════════════════════════════╝ */
+.page-outer { padding:84px 36px 110px; background:var(--bg); }
+.page-shell {
+  max-width:848px; margin:0 auto;
+  background:var(--bg-2);
+  box-shadow:
+    0 0 0 1px rgba(196,140,48,.25),
+    0 0 0 4px rgba(196,140,48,.05),
+    0 48px 90px rgba(0,0,0,.65),
+    inset 0 1px 0 rgba(196,140,48,.1);
+  position:relative;
+}
+/* Animated spinning gem corners */
+.gem {
+  position:absolute; width:12px; height:12px;
+  background:var(--gold);
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  z-index:10;
+  animation:gemPulse 3s ease-in-out infinite;
+}
+.gem.tl { top:-6px;  left:-6px;  animation-delay:0s; }
+.gem.tr { top:-6px;  right:-6px; animation-delay:.75s; }
+.gem.bl { bottom:-6px; left:-6px;  animation-delay:1.5s; }
+.gem.br { bottom:-6px; right:-6px; animation-delay:2.25s; }
+.corner-accent {
+  position:absolute; width:34px; height:34px; z-index:9;
+}
+.corner-accent.tl { top:-1px; left:-1px; border-top:2px solid var(--gold); border-left:2px solid var(--gold); }
+.corner-accent.tr { top:-1px; right:-1px; border-top:2px solid var(--gold); border-right:2px solid var(--gold); }
+.corner-accent.bl { bottom:-1px; left:-1px; border-bottom:2px solid var(--gold); border-left:2px solid var(--gold); }
+.corner-accent.br { bottom:-1px; right:-1px; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold); }
+
+.page-inner {
+  padding: 78px 92px 88px;
+  position:relative; z-index:1;
+}
+/* Vertical margin accent lines */
+.page-inner::before, .page-inner::after {
+  content:''; position:absolute;
+  top:90px; bottom:90px; width:1px;
+  background:linear-gradient(180deg,transparent,rgba(196,140,48,.18),rgba(196,140,48,.22),rgba(196,140,48,.18),transparent);
+}
+.page-inner::before { left:34px; }
+.page-inner::after  { right:34px; }
+
+/* ╔══════════════════════════════════════╗
+   ║           PAGE HEADER                ║
+   ╚══════════════════════════════════════╝ */
+.pg-head {
+  text-align:center;
+  padding-bottom:58px;
+  border-bottom:1px solid var(--g-bdr);
+  margin-bottom:62px;
+}
+.pg-kicker { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.5em; color:var(--jade); text-transform:uppercase; margin-bottom:22px; }
+.pg-deco-q {
+  display:block; line-height:.65;
+  font-family:'Cormorant Garamond',serif;
+  font-size:10rem; font-weight:300; margin-bottom:-18px;
+  background:linear-gradient(180deg, var(--gold) 0%, var(--gold-lo) 55%, transparent 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  opacity:.3;
+}
+.pg-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.9rem,4vw,2.9rem);
+  font-weight:600; line-height:1.22; color:var(--cream); margin-bottom:4px;
+}
+.pg-title em { font-style:italic; color:var(--gold-hi); }
+.pg-rule {
+  width:68px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-pale),transparent);
+  margin:22px auto 0;
+}
+
+/* ╔══════════════════════════════════════╗
+   ║     DROPCAP LETTERS (8 styles)       ║
+   ╚══════════════════════════════════════╝ */
+.drop {
+  float:left;
+  font-family:'Cinzel Decorative','Cinzel',serif;
+  font-size:5.6em; line-height:.7;
+  padding-right:14px; padding-top:7px;
+  font-weight:700;
+}
+/* 1 – Gold cascade to jade */
+.drop.gj {
+  background:linear-gradient(150deg,#f4c84e 0%,var(--gold) 38%,var(--jade) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 10px rgba(196,140,48,.45));
+}
+/* 2 – Emerald pulse */
+.drop.em {
+  background:linear-gradient(160deg,var(--jade-hi) 0%,var(--jade) 42%,var(--jade-lo) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 10px rgba(78,148,104,.5));
+}
+/* 3 – Amber flame */
+.drop.af {
+  background:linear-gradient(180deg,#f8d060 0%,var(--gold) 45%,#a06020 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 12px rgba(200,140,48,.5));
+}
+/* 4 – Deep throne gold */
+.drop.dg {
+  background:linear-gradient(135deg,#eed058 0%,var(--gold-pale) 40%,#7a5018 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 10px rgba(160,110,30,.5));
+}
+/* 5 – Silver moonlight */
+.drop.sl {
+  background:linear-gradient(140deg,#e8e0cc 0%,#c0b890 45%,#988868 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 8px rgba(200,180,140,.35));
+}
+/* 6 – Jade-to-gold sunrise */
+.drop.jg {
+  background:linear-gradient(125deg,var(--jade-hi) 0%,var(--jade) 30%,var(--gold) 65%,var(--gold-hi) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 12px rgba(120,180,130,.45));
+}
+/* 7 – Imperial purple-gold */
+.drop.ip {
+  background:linear-gradient(135deg,#c8a8e8 0%,#9878c0 30%,var(--gold) 70%,var(--gold-hi) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 12px rgba(160,130,210,.45));
+}
+/* 8 – Ruby fire */
+.drop.rf {
+  background:linear-gradient(140deg,#e85040 0%,#b84828 35%,var(--gold-hi) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  filter:drop-shadow(0 2px 14px rgba(200,60,40,.5));
+}
+
+/* ╔══════════════════════════════════════╗
+   ║         ESSAY PARAGRAPHS             ║
+   ╚══════════════════════════════════════╝ */
+.essay p { color:var(--cream); margin-bottom:1.62em; text-align:justify; }
+.key-term { color:var(--gold-pale); font-style:italic; }
+.key-jade { color:var(--jade-hi); font-style:italic; }
+.key-cream { color:var(--cream); font-weight:600; font-style:normal; }
+
+/* ╔══════════════════════════════════════╗
+   ║         SECTION MARKERS              ║
+   ╚══════════════════════════════════════╝ */
+.sec {
+  position:relative;
+  padding-top:58px;
+  margin-top:8px;
+}
+/* Watermark glyph behind section */
+.sec::before {
+  content:attr(data-glyph);
+  position:absolute;
+  top:30px; right:-10px;
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(100px,16vw,180px);
+  color:transparent;
+  -webkit-text-stroke:1px rgba(196,140,48,.05);
+  pointer-events:none; user-select:none;
+  line-height:1; z-index:0;
+}
+.sec-mark {
+  display:flex; align-items:center; gap:0;
+  margin-bottom:34px; position:relative; z-index:1;
+}
+.sec-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--g-bdr)); }
+.sec-line.r { background:linear-gradient(90deg,var(--g-bdr),transparent); }
+.sec-core {
+  display:flex; align-items:center; gap:10px;
+  padding:0 20px;
+}
+.sec-diamond { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); animation:gemPulse 3s ease-in-out infinite; }
+.sec-diamond.j { background:var(--jade); animation:jadePulse 3s ease-in-out infinite; }
+.sec-lbl { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.52em; color:var(--gold); text-transform:uppercase; }
+.sec-lbl.j { color:var(--jade); }
+
+/* ╔══════════════════════════════════════╗
+   ║         SVG ORNAMENT DIVIDER         ║
+   ╚══════════════════════════════════════╝ */
+.orn-svg { display:block; width:100%; margin:40px 0; overflow:visible; }
+
+/* ╔══════════════════════════════════════╗
+   ║    PULL QUOTES – GLASS STYLE (A)     ║
+   ╚══════════════════════════════════════╝ */
+.pqa {
+  margin:52px -40px;
+  padding:38px 54px;
+  text-align:center; position:relative;
+  background:rgba(196,140,48,.07);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-top:1px solid rgba(196,140,48,.28);
+  border-bottom:1px solid rgba(196,140,48,.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 8px 32px rgba(0,0,0,.25);
+}
+.pqa::before, .pqa::after {
+  content:''; position:absolute; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg,transparent,var(--jade),transparent);
+}
+.pqa::before{left:0;} .pqa::after{right:0;}
+.pqa p {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.45rem,2.4vw,1.92rem);
+  font-style:italic; font-weight:400; line-height:1.55; color:var(--cream);
+  position:relative;
+}
+.pqa p::before {
+  content:'\201C'; position:absolute; left:-32px; top:-14px;
+  font-size:5.5rem; line-height:1; color:var(--gold); opacity:.18;
+  font-family:'Cormorant Garamond',serif;
+}
+.pqa p::after {
+  content:'\201D'; position:absolute; right:-18px; bottom:-28px;
+  font-size:5.5rem; line-height:1; color:var(--jade); opacity:.15;
+  font-family:'Cormorant Garamond',serif;
+}
+
+/* ╔══════════════════════════════════════╗
+   ║    PULL QUOTES – AMBER SIDE (B)      ║
+   ╚══════════════════════════════════════╝ */
+.pqb {
+  margin:44px 0;
+  padding:28px 36px 28px 40px;
+  border-left:3px solid var(--gold);
+  background:linear-gradient(135deg,rgba(196,140,48,.09),rgba(196,140,48,.04));
+  box-shadow:inset 0 0 0 1px rgba(196,140,48,.1), 4px 0 20px rgba(0,0,0,.2);
+  position:relative;
+}
+.pqb::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,var(--gold),transparent 55%); }
+.pqb::after  { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,var(--gold),transparent 55%); }
+.pqb p { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-style:italic; line-height:1.58; color:var(--gold-pale); }
+
+/* ╔══════════════════════════════════════╗
+   ║      METAPHOR SPOTLIGHT BOX          ║
+   ╚══════════════════════════════════════╝ */
+.meta-spot {
+  margin:50px -12px;
+  padding:48px 56px;
+  text-align:center; position:relative;
+  background:linear-gradient(145deg,rgba(196,140,48,.09) 0%,rgba(78,148,104,.06) 60%,rgba(196,140,48,.05) 100%);
+}
+/* Spinning conic border */
+.meta-spot-border {
+  position:absolute; inset:-1px; overflow:hidden; pointer-events:none;
+}
+.meta-spot-border::before {
+  content:''; position:absolute; inset:-100%;
+  background:conic-gradient(from 0deg, var(--gold),transparent 40%,var(--jade),transparent 70%,var(--gold));
+  animation:spinBorder 7s linear infinite;
+}
+.meta-spot-border::after {
+  content:''; position:absolute; inset:1px;
+  background:inherit;
+}
+.meta-spot-inner { position:relative; z-index:1; }
+.meta-spot-lbl { font-family:'Cinzel',serif; font-size:8.5px; letter-spacing:.44em; color:var(--jade); text-transform:uppercase; margin-bottom:22px; }
+/* Giant ghost quote mark */
+.meta-spot::after {
+  content:'\201C'; position:absolute; left:12px; top:-10px;
+  font-family:'Cormorant Garamond',serif; font-size:14rem; line-height:1;
+  color:var(--gold); opacity:.07; pointer-events:none;
+}
+.meta-text {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,3vw,2.3rem);
+  font-weight:400; font-style:italic; line-height:1.48;
+  background:linear-gradient(90deg,var(--gold-lo),var(--gold),var(--gold-hi),#fff8d0,var(--gold-hi),var(--gold),var(--gold-lo));
+  background-size:300% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:shimmer 7s linear infinite;
+}
+
+/* ╔══════════════════════════════════════╗
+   ║   CITATION BOXES — SPINNING BORDER   ║
+   ╚══════════════════════════════════════╝ */
+.cit-outer {
+  position:relative; margin:16px 0;
+  padding:1.5px;
+  overflow:hidden;
+}
+/* Spinning border */
+.cit-outer::before {
+  content:''; position:absolute; inset:-100%;
+  background:conic-gradient(from 0deg, var(--gold) 0deg, transparent 60deg, var(--gold-pale) 120deg, transparent 180deg, var(--gold) 240deg, transparent 300deg, var(--gold) 360deg);
+  animation:spinBorder 6s linear infinite;
+  z-index:0;
+}
+.cit-outer.jade-spin::before {
+  background:conic-gradient(from 0deg, var(--jade) 0deg, transparent 60deg, var(--jade-hi) 120deg, transparent 180deg, var(--jade) 240deg, transparent 300deg, var(--jade) 360deg);
+  animation-duration:8s;
+}
+.cit-card {
+  position:relative; z-index:1;
+  background:var(--bg-3);
+  padding:28px 34px;
+}
+.cit-source-row {
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:16px;
+}
+.cit-gem {
+  width:8px; height:8px;
+  background:var(--gold);
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  animation:gemPulse 2.5s ease-in-out infinite;
+  flex-shrink:0;
+}
+.cit-gem.jade { background:var(--jade); animation:jadePulse 2.5s ease-in-out infinite; }
+.cit-source-txt { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.34em; color:var(--gold); text-transform:uppercase; }
+.cit-source-txt.jade { color:var(--jade); }
+.cit-source-line { flex:1; height:1px; background:linear-gradient(90deg,rgba(196,140,48,.2),transparent); }
+.cit-source-line.jade { background:linear-gradient(90deg,rgba(78,148,104,.22),transparent); }
+.cit-body { font-family:'Cormorant Garamond',serif; font-size:1.16rem; font-style:italic; color:var(--cream-2); line-height:1.74; }
+.cit-body em { color:var(--cream); }
+
+/* ╔══════════════════════════════════════╗
+   ║          BIO NATURE BOX              ║
+   ╚══════════════════════════════════════╝ */
+.bio {
+  margin:42px 0;
+  padding:32px 38px;
+  background:linear-gradient(135deg,rgba(78,148,104,.1),rgba(78,148,104,.05));
+  border:1px solid var(--j-bdr);
+  border-left:3px solid var(--jade);
+  position:relative;
+  box-shadow:inset 0 0 0 1px rgba(78,148,104,.08);
+}
+.bio::before {
+  content:attr(data-lbl); position:absolute; top:-10px; left:20px;
+  padding:0 12px; background:var(--bg-2);
+  font-family:'Cinzel',serif; font-size:8px; letter-spacing:.34em; color:var(--jade); text-transform:uppercase;
+}
+.bio p { font-size:.97rem; color:var(--cream-2); line-height:1.78; margin-bottom:.72em; text-align:left; }
+.bio p:last-child { margin-bottom:0; }
+.bio .sym { color:var(--jade); margin:0 4px; }
+
+/* ╔══════════════════════════════════════╗
+   ║         AUTHORITY QUOTE BOX          ║
+   ╚══════════════════════════════════════╝ */
+.auth-box {
+  margin:44px 0; position:relative;
+  padding:1.5px;
+  overflow:hidden;
+}
+.auth-box::before {
+  content:''; position:absolute; inset:-100%;
+  background:conic-gradient(from 0deg, var(--gold-pale) 0deg, transparent 50deg, rgba(196,140,48,.3) 100deg, transparent 150deg, var(--gold-pale) 200deg, transparent 250deg, var(--gold-pale) 360deg);
+  animation:spinBorder 9s linear infinite;
+  opacity:.8;
+}
+.auth-inner {
+  position:relative; z-index:1;
+  background:var(--bg-4);
+  padding:34px 42px;
+}
+.auth-inner::after {
+  content:'\201D'; position:absolute; right:18px; bottom:-24px;
+  font-family:'Cormorant Garamond',serif; font-size:8rem; line-height:1;
+  color:var(--gold); opacity:.1; pointer-events:none;
+}
+.auth-name {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:.38em;
+  color:var(--gold-pale); text-transform:uppercase; margin-bottom:15px;
+  display:flex; align-items:center; gap:12px;
+}
+.auth-name::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--g-bdr),transparent); }
+.auth-q { font-family:'Cormorant Garamond',serif; font-size:1.22rem; font-style:italic; color:var(--cream); line-height:1.72; }
+
+/* ╔══════════════════════════════════════╗
+   ║         CENTRAL IDEA BOX             ║
+   ╚══════════════════════════════════════╝ */
+.idea-box {
+  margin:40px 0;
+  padding:28px 34px;
+  position:relative;
+  background:rgba(78,148,104,.07);
+  border:1px solid var(--j-bdr);
+  box-shadow:0 4px 24px rgba(0,0,0,.2), inset 0 1px 0 rgba(78,148,104,.1);
+}
+.idea-box::before {
+  content:attr(data-lbl); position:absolute; top:-10px; left:20px;
+  padding:0 12px; background:var(--bg-2);
+  font-family:'Cinzel',serif; font-size:8px; letter-spacing:.34em; color:var(--jade); text-transform:uppercase;
+}
+.idea-box p { font-size:.97rem; color:var(--cream-2); line-height:1.78; margin-bottom:.7em; text-align:left; }
+.idea-box p:last-child { margin-bottom:0; }
+.idea-box strong { color:var(--cream); }
+
+/* ╔══════════════════════════════════════╗
+   ║         GRAND FINALE BOX             ║
+   ╚══════════════════════════════════════╝ */
+.finale-wrap {
+  margin:56px -16px;
+  position:relative;
+  padding:3px;
+  overflow:hidden;
+}
+/* Triple-layer spinning border */
+.finale-wrap::before {
+  content:''; position:absolute; inset:-100%;
+  background:conic-gradient(from 0deg,
+    var(--gold) 0deg, var(--gold-hi) 30deg, transparent 70deg,
+    var(--jade) 100deg, var(--jade-hi) 130deg, transparent 170deg,
+    var(--gold) 200deg, var(--gold-hi) 230deg, transparent 270deg,
+    var(--jade) 300deg, var(--jade-hi) 330deg, transparent 360deg);
+  animation:spinBorder 5s linear infinite;
+}
+.finale-inner {
+  position:relative; z-index:1;
+  background:linear-gradient(145deg,rgba(196,140,48,.09) 0%,rgba(78,148,104,.07) 40%,rgba(196,140,48,.06) 100%);
+  padding:60px 64px;
+  text-align:center;
+  box-shadow:inset 0 0 80px rgba(196,140,48,.04);
+}
+/* Corner gems */
+.fin-gem {
+  position:absolute; width:10px; height:10px;
+  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+}
+.fin-gem.g { background:var(--gold); animation:gemPulse 2s ease-in-out infinite; }
+.fin-gem.j { background:var(--jade); animation:jadePulse 2s ease-in-out infinite; animation-delay:.5s; }
+.fin-gem.a  { top:-5px;  left:-5px; }
+.fin-gem.b  { top:-5px;  right:-5px; animation-delay:1s; }
+.fin-gem.c  { bottom:-5px; left:-5px;  animation-delay:.5s; }
+.fin-gem.d  { bottom:-5px; right:-5px; animation-delay:1.5s; }
+
+/* Inner border frame inside the finale */
+.finale-frame {
+  position:absolute; inset:14px;
+  border:1px solid rgba(196,140,48,.18);
+  pointer-events:none;
+}
+.finale-frame::before, .finale-frame::after {
+  content:''; position:absolute;
+  width:18px; height:18px;
+}
+.finale-frame::before { top:-1px; left:-1px; border-top:1px solid var(--gold); border-left:1px solid var(--gold); }
+.finale-frame::after  { bottom:-1px; right:-1px; border-bottom:1px solid var(--gold); border-right:1px solid var(--gold); }
+
+.fin-eyebrow { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.5em; color:var(--jade); text-transform:uppercase; margin-bottom:28px; }
+.fin-body {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.45rem,2.6vw,2.05rem);
+  font-weight:400; font-style:italic; line-height:1.68;
+  background:linear-gradient(90deg,var(--cream-3),var(--cream),var(--gold-hi),#fff8e0,var(--gold-hi),var(--cream),var(--cream-3));
+  background-size:300% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:shimmer 9s linear infinite;
+  position:relative;
+}
+.fin-coda {
+  margin-top:30px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.55rem,2.8vw,2.1rem);
+  font-style:italic; font-weight:700; letter-spacing:.04em;
+  background:linear-gradient(90deg,var(--gold-lo),var(--gold),var(--gold-hi),#fff8b0,var(--gold-hi),var(--gold),var(--gold-lo));
+  background-size:300% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:shimmer 4s linear infinite;
+  filter:drop-shadow(0 0 18px rgba(196,140,48,.35));
+}
+
+/* ╔══════════════════════════════════════╗
+   ║           CLOSING                    ║
+   ╚══════════════════════════════════════╝ */
+.closing {
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+  padding:52px 0 0; margin-top:52px;
+  border-top:1px solid var(--g-bdr);
+}
+.closing-icon {
+  font-family:'Cinzel Decorative',serif; font-size:2rem;
+  background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  opacity:.6; animation:floatUp 4s ease-in-out infinite, shimmer 6s linear infinite;
+}
+.closing-lbl { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.42em; color:var(--cream-4); text-transform:uppercase; }
+
+/* ── FOOTER ── */
+footer { padding:52px 36px; text-align:center; border-top:1px solid var(--g-bdr); }
+footer p { font-family:'Cinzel',serif; font-size:8.5px; letter-spacing:.36em; color:var(--cream-4); text-transform:uppercase; line-height:2.4; }
+
+/* ── SCROLL REVEAL ── */
+.rev { opacity:0; transform:translateY(28px); transition:opacity .72s ease, transform .72s ease; }
+.rev.vis { opacity:1; transform:translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:760px){
+  .page-outer{padding:36px 12px 60px;}
+  .page-inner{padding:40px 24px 48px;}
+  .page-inner::before,.page-inner::after{display:none;}
+  .pqa,.meta-spot,.finale-wrap{margin-left:0;margin-right:0;padding-left:26px;padding-right:26px;}
+  .hero{padding:70px 22px 60px;}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ══════════════════════════════════════ HERO ══════════════════════════════════════ -->
+<header class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glyph">和</div>
+
+  <div class="h-badge">
+    <span class="h-badge-line"></span>
+    <span class="h-badge-txt">Bài Văn Đạt Điểm Tuyệt Đối</span>
+    <span class="h-badge-line r"></span>
+  </div>
+
+  <div class="h-score">150 / 150</div>
+  <div class="h-score-lbl">Điểm tuyệt đối · Bài thi Văn nghị luận</div>
+
+  <h1 class="h-title">Củ Cải Nướng Thịt,<br><em>Đã Khác</em></h1>
+  <p class="h-sub">Luận đề về hòa hợp, bản sắc và sức mạnh của sự khác biệt</p>
+  <div class="h-rule"></div>
+
+  <div class="h-epigraph">
+    <blockquote>
+      "Mỗi vật đều có một tính, nước thì nhạt, muối thì mặn. Chua ngọt cay mặn nhạt, năm vị điều hoà, cùng tồn tại hoà trộn tạo ra trăm ngàn vị khác. Vật đã thế, sự việc cũng thế, con người càng thế."
+      <cite>— Đề bài</cite>
+    </blockquote>
+  </div>
+
+  <div class="scroll-cue"><span>Đọc bài văn</span><div class="scroll-stem"></div></div>
+</header>
+
+<!-- ══════════════════════════════════════ PAGE ══════════════════════════════════════ -->
+<div class="page-outer">
+<div class="page-shell rev">
+  <!-- Animated gem corners -->
+  <div class="gem tl"></div><div class="gem tr"></div>
+  <div class="gem bl"></div><div class="gem br"></div>
+  <div class="corner-accent tl"></div><div class="corner-accent tr"></div>
+  <div class="corner-accent bl"></div><div class="corner-accent br"></div>
+
+  <div class="page-inner">
+    <!-- Page header -->
+    <div class="pg-head">
+      <div class="pg-kicker">Bài Làm · Văn Nghị Luận · Điểm Tuyệt Đối</div>
+      <span class="pg-deco-q">"</span>
+      <h2 class="pg-title">Củ cải nấu lên vẫn là củ cải,<br>củ cải nướng thịt <em>thì đã khác</em></h2>
+      <div class="pg-rule"></div>
+    </div>
+
+    <article class="essay">
+
+      <!-- ▓▓ SECTION 1: NGỤ NGÔN ▓▓ -->
+      <div class="sec" data-glyph="羊">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond"></div>
+            <span class="sec-lbl">Ngụ Ngôn</span>
+            <div class="sec-diamond"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <p class="rev"><span class="drop gj">T</span>om là một cậu bé chăn cừu, cậu có một đàn cừu thuần màu trắng như một đám mây cực lớn. Chính vì thế Tom cực kì ghét con cừu đen duy nhất trong đàn, cậu luôn hăm he làm thịt nó.</p>
+
+        <p class="rev">Vào một ngày mùa đông nọ, trời đổ tuyết lớn, đàn cừu màu trắng lẫn trong nền tuyết làm Tom không cách nào tìm được. Cuối cùng nhờ con cừu đen duy nhất đó mà Tom tìm về được đàn cừu của mình.</p>
+
+        <p class="rev" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-style:italic; color:var(--cream-2); padding:6px 0;">
+          Từ đây Tom hiểu được một đạo lý — <span class="key-term">thuần tuý cố nhiên rất đẹp,</span> thế nhưng <span class="key-jade">cộng sinh hài hoà lại càng tốt hơn.</span>
+        </p>
+      </div>
+
+      <!-- ▓▓ SECTION 2: VẠN VẬT ▓▓ -->
+      <div class="sec" data-glyph="萬">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond j"></div>
+            <span class="sec-lbl j">Vạn Vật</span>
+            <div class="sec-diamond j"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <p class="rev"><span class="drop em">T</span>rên thực tế, mỗi vật đều có tính chất khác nhau, có vẻ đẹp khác nhau. Hổ dễ nổi nóng, khỉ hấp tấp, cừu hiền lành — động vật đã vậy, thực vật lại càng thú vị hơn; trên đời này không bao giờ có hai chiếc lá giống hệt nhau, cả những thứ cùng loại cũng không phải nhất thành bất biến, huống chi là những vật khác nhau hoàn toàn.</p>
+
+        <!-- Pull Quote A – Glass -->
+        <div class="pqa rev">
+          <p>Vật đã thế — con người càng thế…</p>
+        </div>
+      </div>
+
+      <!-- ▓▓ SECTION 3: VẤN ĐỀ ▓▓ -->
+      <div class="sec" data-glyph="問">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond"></div>
+            <span class="sec-lbl">Vấn Đề</span>
+            <div class="sec-diamond"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <p class="rev"><span class="drop af">T</span>ả Truyền từng viết: tư tưởng con người không ai giống ai, mỗi người một vẻ — mà tư tưởng thế nào hoàn toàn phụ thuộc vào tính cách của người đó. Nếu muốn tôn trọng cái gọi là tư tưởng đó thì cần học cách khoan dung, đừng bao giờ vọng tưởng thống nhất tư tưởng — <span class="key-term">đó là điều phi lý.</span></p>
+
+        <!-- SVG ornament -->
+        <svg class="orn-svg rev" height="22" viewBox="0 0 540 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="11" x2="200" y2="11" stroke="rgba(196,140,48,.2)" stroke-width="1"/>
+          <polygon points="222,3 234,11 222,19 210,11" fill="none" stroke="rgba(196,140,48,.45)" stroke-width="1"/>
+          <circle cx="270" cy="11" r="3.5" fill="rgba(196,140,48,.5)"/>
+          <polygon points="318,3 330,11 318,19 306,11" fill="none" stroke="rgba(196,140,48,.45)" stroke-width="1"/>
+          <line x1="340" y1="11" x2="540" y2="11" stroke="rgba(196,140,48,.2)" stroke-width="1"/>
+        </svg>
+
+        <p class="rev" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; color:var(--cream-2); padding:4px 20px;">
+          Nhưng vấn đề là đã không cách nào thống nhất tư tưởng, vậy phải <span class="key-cream">chung sống thế nào?</span>
+        </p>
+      </div>
+
+      <!-- ▓▓ SECTION 4: GIẢI PHÁP ▓▓ -->
+      <div class="sec" data-glyph="道">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond j"></div>
+            <span class="sec-lbl j">Giải Pháp</span>
+            <div class="sec-diamond j"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <p class="rev"><span class="drop dg">C</span>ó hai cách. Một là tập hợp những người cùng chung chí hướng, những người cùng chung sở thích tập hợp với nhau, hình thành nên một quần thể có quan niệm chung.</p>
+
+        <p class="rev">Nhưng tiếc là chuyện này rất hiếm có —</p>
+
+        <!-- METAPHOR SPOTLIGHT -->
+        <div class="meta-spot rev">
+          <div class="meta-spot-border"></div>
+          <div class="meta-spot-inner">
+            <div class="meta-spot-lbl">Ẩn Dụ Trung Tâm</div>
+            <div class="meta-text">"Củ cải nấu lên vẫn là củ cải,<br>củ cải nướng thịt thì đã khác."</div>
+          </div>
+        </div>
+
+        <p class="rev"><span class="drop sl">S</span>ự tham gia của nhiều tư tưởng giống mà khác nhau này còn phá vỡ sự cân bằng, sản sinh ra biến hoá. Cát rơi vào miệng trai, thành trân châu quý giá; bụi trong hơi nước hoà thành mưa.</p>
+
+        <!-- Pull Quote B – Amber -->
+        <div class="pqb rev">
+          <p>"Người với người khác nhau, chưa chắc là chuyện xấu — chim diều không cần phải biến thành quạ mới có thể chung sống hoà bình."</p>
+        </div>
+
+        <p class="rev" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.18rem; font-style:italic; color:var(--cream-2);">
+          Nói cách khác là <span class="key-term">mỗi người một vẻ</span> — tức là hoà hợp.
+        </p>
+      </div>
+
+      <!-- ▓▓ SECTION 5: MINH CHỨNG ▓▓ -->
+      <div class="sec" data-glyph="和">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond"></div>
+            <span class="sec-lbl">Minh Chứng Triết Học</span>
+            <div class="sec-diamond"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <!-- Citation: Lão Tử – spinning gold border -->
+        <div class="cit-outer rev">
+          <div class="cit-card">
+            <div class="cit-source-row">
+              <div class="cit-gem"></div>
+              <span class="cit-source-txt">Lão Tử · Bản Thể Triết Học</span>
+              <div class="cit-source-line"></div>
+            </div>
+            <p class="cit-body">Từ bản thể triết học mà nói, hoà hợp là quy luật vận hành của vạn vật. Lão Tử nói: <em>"Vạn vật đều có âm có dương, cân bằng âm dương chính là hoà hợp."</em></p>
+          </div>
+        </div>
+
+        <!-- Citation: Lễ Ký – spinning gold border -->
+        <div class="cit-outer rev">
+          <div class="cit-card">
+            <div class="cit-source-row">
+              <div class="cit-gem"></div>
+              <span class="cit-source-txt">Lễ Ký · Triết Học Thực Hành</span>
+              <div class="cit-source-line"></div>
+            </div>
+            <p class="cit-body">Từ góc độ triết học, hoà hợp là cảnh giới cuối cùng mà con người theo đuổi. Lễ Ký viết: <em>"Những kẻ biết hoà hợp mới là kẻ làm chủ và đạt được cái đạo của thiên hạ."</em> Hoà hợp tạo ra sự xây dựng, sản sinh, thuận tiện, thành công và thịnh vượng.</p>
+          </div>
+        </div>
+
+        <!-- Citation: Luận Ngữ – spinning jade border -->
+        <div class="cit-outer jade-spin rev">
+          <div class="cit-card">
+            <div class="cit-source-row">
+              <div class="cit-gem jade"></div>
+              <span class="cit-source-txt jade">Luận Ngữ · Phương Pháp Luận</span>
+              <div class="cit-source-line jade"></div>
+            </div>
+            <p class="cit-body">Từ góc độ phương pháp luận triết học, hoà hợp là quy tắc làm người cơ bản. Luận Ngữ viết: <em>"Quân tử hoà hợp nhưng cũng khác nhau."</em> Chỉ khi thuận theo quy tắc hoà hợp để diễn sinh phát triển thì mới có thể tồn tại lâu dài.</p>
+          </div>
+        </div>
+
+        <!-- Bio box -->
+        <div class="bio rev" data-lbl="Góc Độ Sinh Học · Cộng Sinh">
+          <p>Từ góc độ sinh học, cộng sinh là một trong những mối quan hệ quan trọng nhất trong hệ sinh thái — hai loài sinh vật cùng giúp nhau tồn tại; thiếu một bên, bên còn lại cũng khó sống nổi.</p>
+          <p><span class="sym">✦</span> Tảo và nấm cộng sinh &nbsp;<span class="sym">·</span>&nbsp; Cá sấu cộng sinh với chim bắt sâu &nbsp;<span class="sym">·</span>&nbsp; Bò tót cộng sinh với chim ăn ruồi bọ</p>
+        </div>
+      </div>
+
+      <!-- ▓▓ SECTION 6: ỨNG DỤNG ▓▓ -->
+      <div class="sec" data-glyph="用">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond j"></div>
+            <span class="sec-lbl j">Ứng Dụng</span>
+            <div class="sec-diamond j"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <p class="rev"><span class="drop jg">H</span>oà hợp mà khác biệt: điều quan trọng nhất là phải chấp nhận và dung nạp vạn vật; thứ hai là biết chọn lựa và sử dụng những thứ phù hợp với đặc tính tự thân để hoàn thiện chính mình; cuối cùng là đặt mình trong nhiều hoàn cảnh, tập cho bản thân tính phóng khoáng lạc quan.</p>
+
+        <p class="rev"><span class="drop ip">D</span>ù là một chỉnh thể bền chắc như thép cũng phải có một thứ khác biệt để điều hoà. Không ít những công ty quốc tế luôn giữ vài người có ý kiến trái ngược nhau trong hội đồng quản trị — những người này sẽ luôn soi mói, làm khó dễ các quyết định được hội đồng đưa ra; thế nhưng chỉ có vậy mới có thể thúc đẩy hội đồng đưa ra những quyết sách chính xác và đúng đắn nhất.</p>
+
+        <!-- Authority: Đặng Tiểu Bình -->
+        <div class="auth-box rev">
+          <div class="auth-inner">
+            <div class="auth-name">Đặng Tiểu Bình</div>
+            <p class="auth-q">"Với những người gây dựng sự nghiệp từ hai bàn tay trắng, trong nhóm có 3–4 người trung thành và 1 người luôn làm trái lại, chính là tổ hợp tuyệt vời nhất."</p>
+          </div>
+        </div>
+
+        <!-- Idea box -->
+        <div class="idea-box rev" data-lbl="Đạo Lý">
+          <p>Kẻ làm trái lại ấy đóng vai người điều hoà — anh ta phản bác, đánh thức, thúc tiến người lãnh đạo, <strong>như chim gõ kiến trên cây, vừa là bác sĩ vừa là kẻ gây tai hoạ.</strong> Nhưng nó sẽ luôn luôn tồn tại song hành với bạn.</p>
+        </div>
+      </div>
+
+      <!-- ▓▓ SECTION 7: BẢN SẮC ▓▓ -->
+      <div class="sec" data-glyph="鹽">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond"></div>
+            <span class="sec-lbl">Bản Sắc</span>
+            <div class="sec-diamond"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <p class="rev"><span class="drop rf">V</span>ậy vấn đề mới lại sinh ra: <span class="key-cream">dung hợp có làm mất đi bản chất của mình không?</span></p>
+
+        <p class="rev">Hoà hợp, chỉ là điều hoà — không phải hoà tan rồi làm mất bản thân. Bạn có thể đứng ở một nơi nhìn ra thế giới, cũng có thể đứng ngoài thế giới nhìn vào nơi đó — nhưng đầu tiên bạn phải biết mình là ai, <span class="key-term">sau mới là thế giới.</span></p>
+      </div>
+
+      <!-- ▓▓ SECTION 8: KẾT LUẬN ▓▓ -->
+      <div class="sec" data-glyph="圓">
+        <div class="sec-mark rev">
+          <div class="sec-line"></div>
+          <div class="sec-core">
+            <div class="sec-diamond"></div>
+            <span class="sec-lbl">Kết</span>
+            <div class="sec-diamond"></div>
+          </div>
+          <div class="sec-line r"></div>
+        </div>
+
+        <!-- GRAND FINALE -->
+        <div class="finale-wrap rev">
+          <div class="fin-gem g a"></div><div class="fin-gem j b"></div>
+          <div class="fin-gem j c"></div><div class="fin-gem g d"></div>
+          <div class="finale-inner">
+            <div class="finale-frame"></div>
+            <div class="fin-eyebrow">Lời Kết</div>
+            <p class="fin-body">
+              "Muối bỏ vào nước sinh thành nước muối.<br>
+              Nước muối bỏ thêm vịt cũng chỉ là nước muối vịt.<br>
+              Mặc cho bạn dung hoà vào quần thể thế nào,<br>
+              bạn cũng phải biết mình luôn là muối —"
+            </p>
+            <p class="fin-coda">Mỗi thứ mỗi vẻ, trăm vẻ dung hoà!</p>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- Closing mark -->
+    <div class="closing rev">
+      <div class="closing-icon">✦</div>
+      <div class="closing-lbl">Hết · Điểm Tuyệt Đối 150 / 150</div>
+    </div>
+  </div><!-- /page-inner -->
+</div><!-- /page-shell -->
+</div><!-- /page-outer -->
+
+<footer>
+  <p>Bài Văn Đạt Điểm Tuyệt Đối 150 / 150</p>
+  <p>Luận Đề Về Hòa Hợp &amp; Bản Sắc</p>
+</footer>
+
+<script>
+/* ── Progress bar ── */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  prog.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+}, {passive:true});
+
+/* ── Scroll reveal ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('vis'), i * 35);
+      observer.unobserve(e.target);
+    }
+  });
+}, {threshold:.06, rootMargin:'0px 0px -38px 0px'});
+document.querySelectorAll('.rev').forEach(el => observer.observe(el));
+
+/* ── Hero canvas particles ── */
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  if(!canvas) return;
+  const hero = canvas.parentElement;
+  function resize(){
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const ctx = canvas.getContext('2d');
+
+  const particles = Array.from({length:120}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.4 + .3,
+    vx: (Math.random()-.5) * .35,
+    vy: (Math.random()-.5) * .35,
+    a: Math.random(),
+    da: (Math.random()-.5) * .008,
+    gold: Math.random() > .45,
+  }));
+
+  function draw(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.a += p.da;
+      if(p.a <= 0 || p.a >= 1) p.da *= -1;
+      if(p.x < 0) p.x = canvas.width;
+      if(p.x > canvas.width) p.x = 0;
+      if(p.y < 0) p.y = canvas.height;
+      if(p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = p.gold
+        ? `rgba(200,155,60,${p.a * .75})`
+        : `rgba(100,180,130,${p.a * .55})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
